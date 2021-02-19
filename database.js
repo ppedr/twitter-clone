@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
 
 mongoose.set("useNewUrlParser", true);
@@ -12,8 +13,10 @@ class Database {
         this.connect();
     }
 
+
     connect() {
-        mongoose.connect("mongodb+srv://admin:admin@twitterclonecluster.fdkmb.mongodb.net/TwitterCloneDB?retryWrites=true&w=majority")
+        const stringConnection = `mongodb+srv://${process.env.USER}:${process.env.PWD}@${process.env.CLUSTER}.fdkmb.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`;
+        mongoose.connect(stringConnection)
         .then(() => {
             console.log("Database connection succesful! ✔");
         })
